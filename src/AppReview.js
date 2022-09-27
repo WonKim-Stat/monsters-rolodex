@@ -1,14 +1,13 @@
 import { Component } from "react";
 import "./App.css";
 
-// Class Component
-class App extends Component {
+class AppReview extends Component {
   constructor() {
     super(); //call the super class constructor and pass in ()
 
     this.state = {
-      monsters: [], // initial state
-    };
+      monsters: [],
+    }; // always json object format. Key value pairs // // initial state
   }
 
   componentDidMount() {
@@ -16,36 +15,33 @@ class App extends Component {
       .then((response) => response.json())
       .then((users) =>
         this.setState(
+          //Either I can pass Object or function inside of setState()
           () => {
-            //Either I can pass Object or function inside of setState()
             return { monsters: users }; // now monsters points to users
           },
           () => {
-            console.log(this.state);
-          } // to check our state updated correctly.
+            console.log(this.state); // to check state got updated correctly
+          }
         )
       );
   }
-
   render() {
     return (
-      <div className="App">
+      <div className="AppReview">
         <input
           className="search-box"
-          type="search"
-          placeholder="search monsters"
+          type="seach"
+          placeholder="Search Monsters"
           onChange={(event) => {
-            const searchString = event.target.value.toLowerCase(); // make it lower case
-            const filteredMonsters = this.state.monsters.filter((monster) => {
-              return monster.name.toLowerCase().includes(searchString); // make it lower case
+            const searchString1 = event.target.value.toLowerCase();
+            const filteredMonsters1 = this.state.monsters.filter((monster) => {
+              return monster.name.toLowerCase().includes(searchString1);
             });
-
             this.setState(() => {
-              return { monsters: filteredMonsters };
+              return { monsters: filteredMonsters1 };
             });
           }}
-        />
-
+        ></input>
         {this.state.monsters.map((monster) => {
           return (
             <div key={monster.id}>
@@ -58,4 +54,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default AppReview;
